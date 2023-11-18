@@ -214,17 +214,6 @@
     }
   }
   </style>
-
-  <script>
-    $(document).ready(function() {
-      $('.color-choose input').on('click', function() {
-          var headphonesColor = $(this).attr('data-image');
-          $('.active').removeClass('active');
-          $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
-          $(this).addClass('active');
-      });
-    });
-  </script>
 </head>
 
 <body class="sub_page">
@@ -242,14 +231,14 @@
 
     <!-- Product Description -->
     <div class="product-description">
-      <span>Headphones</span>
+      <span><a href="{{ url_for('home') }}"><-- Back</a></span>
       <h1>{{ product.name }}</h1>
       <p>{{ product.description }}</p>
     </div>
     <!-- Product Pricing -->
     <div class="product-price">
-      <span>148$</span>
-      <a href="#" class="cart-btn">Add to cart</a>
+      <span>R$ {{ product.price }}</span>
+      <a class="cart-btn">Buy</a>
     </div>
   </div>
 </main>
