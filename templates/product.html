@@ -238,7 +238,7 @@
     <!-- Product Pricing -->
     <div class="product-price">
       <span>R$ {{ product.price }}</span>
-      <a class="cart-btn">Buy</a>
+      <a class="cart-btn" href="{{ url_for('add_to_cart', id=product.id) }}">Buy</a>
     </div>
   </div>
 </main>
