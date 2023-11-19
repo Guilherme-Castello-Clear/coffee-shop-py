@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 import sqlite3
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
@@ -24,9 +24,27 @@ class Cart(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     product = relationship("Product", back_populates="current_cart")
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'product_id': self.product_id,
+        }
+
 
 with app.app_context():
     db.create_all()
+
+
+@app.route('/cart')
+def cart():
+    cart = Cart.query.all()
+    products = []
+    for item in cart:
+        item_json = item.to_dict()
+        item_product = db.get_or_404(Product, item_json['product_id'])
+        products.append(item_product)
+
+    return render_template('cart.html', products=products)
 
 
 @app.route('/add_to_cart/<int:id>', methods=["GET"])
