@@ -35,6 +35,13 @@ with app.app_context():
     db.create_all()
 
 
+@app.route('/remove_from_cart/<int:cart_item_id>')
+def remove_from_cart(cart_item_id):
+    to_delete = db.get_or_404(Cart, cart_item_id)
+    db.session.delete(to_delete)
+    db.session.commit()
+    return redirect('/cart')
+
 @app.route('/cart')
 def cart():
     cart = Cart.query.all()
