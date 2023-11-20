@@ -71,7 +71,17 @@
 </div>
 <div class="float-right">
 <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
-<button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
+  <p></p>
+<form action="/checkout" method="post">
+  <script
+    src="https://checkout.stripe.com/checkout.js"
+    class="stripe-button"
+    data-key="{{ key }}"
+    data-amount="{{ total }}"
+    data-locale="auto">
+  </script>
+</form>
+
 </div>
 </div>
 </div>
